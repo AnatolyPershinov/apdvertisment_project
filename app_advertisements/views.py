@@ -10,7 +10,7 @@ User = get_user_model()
 
 
 def index(request):
-    return render(request, 'app_advertisements/index.html', context)
+    return render(request, 'app_advertisements/index.html')
 
 
 def advertisement_detail(request, pk):
