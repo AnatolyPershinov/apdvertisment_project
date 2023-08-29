@@ -10,16 +10,6 @@ User = get_user_model()
 
 
 def index(request):
-    title = request.GET.get('query')
-    if title:
-        advertisements = Advertisement.objects.filter(title__icontains=title)
-    else:
-        advertisements = Advertisement.objects.all()
-
-    context = {
-        'advertisements': advertisements,
-        'title': title,
-    }
     return render(request, 'app_advertisements/index.html', context)
 
 
@@ -30,17 +20,6 @@ def advertisement_detail(request, pk):
     }
     return render(request, 'app_advertisements/advertisement.html', context)
 
-
-def top_sellers(request):
-    users = User.objects.annotate(
-        adv_count=Count('advertisement')
-    ).order_by('-adv_count')
-
-    context = {
-        'users': users,
-    }
-
-    return render(request, 'app_advertisements/top-sellers.html', context)
 
 
 @login_required(login_url=reverse_lazy('login'))
